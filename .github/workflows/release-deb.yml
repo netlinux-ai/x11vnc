@@ -73,6 +73,12 @@ jobs:
           tag_name: ${{ steps.version.outputs.tag }}
           name: x11vnc ${{ steps.version.outputs.version }}
           body: |
+            x11vnc 0.9.17 (netlinux fork) — VNC server for real X displays.
+
+            Features: multi-touch, mousewheel, 8-button mouse, DRM/shm rawfb,
+            SSL/TLS, robust defaults (-forever, -auth guess, -noxdamage),
+            -noauth option.
+
             Automated build from commit ${{ github.sha }}
 
             Install: `sudo dpkg -i x11vnc_*.deb`

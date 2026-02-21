@@ -1,4 +1,4 @@
-x11vnc 0.9.17	2025-04-11
+x11vnc 0.9.17	2025-04-11 (netlinux: 2026-02-21)
 
 Release Notes
 
@@ -9,6 +9,13 @@ New Features:
     Support for up to 8 mouse buttons and XK_Super_L/R mapping to Meta keys during pipeinput/uinput.
     Experimental support for double-buffered framebuffer and rawfb DRM/shm key options.
     Support for OpenBSD in shm_clear.
+
+Netlinux Default Changes (2026-02-21):
+
+    -forever is now the default (server does not exit after first client disconnects).
+    -auth guess is now the default (automatically find the X authority file).
+    -noxdamage is now the default (avoids problematic XDAMAGE on some systems).
+    New -noauth option to revert the default -auth guess behaviour.
 
 Bug Fixes:
     Fixed TLS handshake errors with OpenSSL 1.1.x and LibreSSL compatibility issues.
@@ -23,11 +30,13 @@ Documentation & Maintenance:
     Removed executable bit from text files, fixed typos, and clarified password limit/error messages.
     Updated issue templates and added FUNDING.yml for community contributions.
     Keywords added to x11vnc.desktop file.
+    Updated man page and OPTIONS.md with new default options and -noauth.
 
 Other Changes:
 
     Fixed build issues on 32-bit architectures with 64-bit time_t and support for builds using -fno-common.
     Addressed gcc -no-common build compatibility.
+    Added CI/CD workflow for automated .deb package builds via GitHub Actions.
 
 
 -----------------------------------------------------------------------------
