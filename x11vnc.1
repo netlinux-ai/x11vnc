@@ -26,9 +26,9 @@ this on the local machine: "vncviewer hostname:N" where "hostname" is
 the name of the machine running x11vnc and N is XXXX - 5900, i.e. usually
 "vncviewer hostname:0".
 .PP
-By default x11vnc will not allow the screen to be shared and it will exit
-as soon as the client disconnects.  See \fB-shared\fR and \fB-forever\fR below to override
-these protections.  See the FAQ for details how to tunnel the VNC connection
+By default x11vnc will not allow the screen to be shared but it will keep
+listening for new connections after a client disconnects (\fB-forever\fR mode).
+See \fB-shared\fR and \fB-once\fR below to change these defaults.  See the FAQ for details how to tunnel the VNC connection
 through an encrypted channel such as 
 .IR ssh (1).
 In brief:
@@ -79,7 +79,8 @@ man pages for more info.
 .IP
 Use '-auth guess' to have x11vnc use its \fB-findauth\fR
 mechanism (described below) to try to guess the
-XAUTHORITY filename and use it.
+XAUTHORITY filename and use it.  This is the Default.
+Use \fB-noauth\fR to disable auth guessing.
 .IP
 XDM/GDM/KDM: if you are running x11vnc as root and want
 to find the XAUTHORITY before anyone has logged into an
@@ -87,6 +88,13 @@ X session yet, use: x11vnc \fB-env\fR FD_XDM=1 \fB-auth\fR guess ...
 (This will also find the XAUTHORITY if a user is already
 logged into the X session.)  When running as root,
 FD_XDM=1 will be tried if the initial \fB-auth\fR guess fails.
+.PP
+\fB-noauth\fR
+.IP
+Disable the default \fB-auth\fR guess behavior.  x11vnc will not
+attempt to automatically find the X authority file.  You will
+need to set XAUTHORITY in the environment or use \fB-auth\fR
+\fIfile\fR explicitly.
 .PP
 \fB-N\fR
 .IP
@@ -481,12 +489,13 @@ connect at the same time (default off).
 \fB-once\fR
 .IP
 Exit after the first successfully connected viewer
-disconnects, opposite of \fB-forever.\fR This is the Default.
+disconnects, opposite of \fB-forever.\fR
 .PP
 \fB-forever\fR
 .IP
 Keep listening for more connections rather than exiting
-as soon as the first client(s) disconnect. Same as \fB-many\fR
+as soon as the first client(s) disconnect. Same as \fB-many\fR.
+This is the Default.
 .IP
 To get the standard non-shared VNC behavior where when
 a new VNC client connects the existing VNC client is
@@ -4797,8 +4806,9 @@ actions.  These can also be set from the tkx11vnc GUI.
 \fB-noxdamage\fR
 .IP
 Do not use the X DAMAGE extension to detect framebuffer
-changes even if it is available.  Use \fB-xdamage\fR if your
-default is to have it off.
+changes even if it is available.  This is the Default
+(XDAMAGE can cause XIO fatal errors on many systems).
+Use \fB-xdamage\fR to re-enable it.
 .IP
 x11vnc's use of the DAMAGE extension: 1) significantly
 reduces the load when the screen is not changing much,

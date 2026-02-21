@@ -161,9 +161,9 @@ this on the local machine: "vncviewer hostname:N" where "hostname" is
 the name of the machine running x11vnc and N is XXXX - 5900, i.e. usually
 "vncviewer hostname:0".
 
-By default x11vnc will not allow the screen to be shared and it will exit
-as soon as the client disconnects.  See -shared and -forever below to override
-these protections.  See the FAQ for details how to tunnel the VNC connection
+By default x11vnc will not allow the screen to be shared but it will keep
+listening for new connections after a client disconnects (-forever mode).
+See -shared and -once below to change these defaults.  See the FAQ for details how to tunnel the VNC connection
 through an encrypted channel such as ssh(1).  In brief:
 
        ssh -t -L 5900:localhost:5900 far-host 'x11vnc -localhost -display :0'
@@ -205,7 +205,8 @@ Options:
 
                        Use '-auth guess' to have x11vnc use its -findauth
                        mechanism (described below) to try to guess the
-                       XAUTHORITY filename and use it.
+                       XAUTHORITY filename and use it.  This is the Default.
+                       Use -noauth to disable auth guessing.
 
                        XDM/GDM/KDM: if you are running x11vnc as root and want
                        to find the XAUTHORITY before anyone has logged into an
@@ -213,6 +214,11 @@ Options:
                        (This will also find the XAUTHORITY if a user is already
                        logged into the X session.)  When running as root,
                        FD_XDM=1 will be tried if the initial -auth guess fails.
+
+-noauth                Disable the default -auth guess behavior.  x11vnc will
+                       not attempt to automatically find the X authority file.
+                       You will need to set XAUTHORITY in the environment or
+                       use -auth file explicitly.
 
 -N                     If the X display is :N, try to set the VNC display to
                        also be :N This just sets the -rfbport option to 5900+N
@@ -538,9 +544,10 @@ Options:
 -shared                VNC display is shared, i.e. more than one viewer can
                        connect at the same time (default off).
 -once                  Exit after the first successfully connected viewer
-                       disconnects, opposite of -forever. This is the Default.
+                       disconnects, opposite of -forever.
 -forever               Keep listening for more connections rather than exiting
-                       as soon as the first client(s) disconnect. Same as -many
+                       as soon as the first client(s) disconnect. Same as -many.
+                       This is the Default.
 
                        To get the standard non-shared VNC behavior where when
                        a new VNC client connects the existing VNC client is
@@ -4284,8 +4291,9 @@ Options:
                        actions.  These can also be set from the tkx11vnc GUI.
 
 -noxdamage             Do not use the X DAMAGE extension to detect framebuffer
-                       changes even if it is available.  Use -xdamage if your
-                       default is to have it off.
+                       changes even if it is available.  This is the Default
+                       (XDAMAGE can cause XIO fatal errors on many systems).
+                       Use -xdamage to re-enable it.
 
                        x11vnc's use of the DAMAGE extension: 1) significantly
                        reduces the load when the screen is not changing much,
