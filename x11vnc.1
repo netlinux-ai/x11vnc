@@ -26,6 +26,11 @@ this on the local machine: "vncviewer hostname:N" where "hostname" is
 the name of the machine running x11vnc and N is XXXX - 5900, i.e. usually
 "vncviewer hostname:0".
 .PP
+The TightVNC viewer (netlinux fork) can automate this entire process
+using its \fB\-sshvnc\fR option: it will SSH to the remote host, start
+x11vnc automatically, discover the display and port, and connect directly.
+See \fBvncviewer\fR(1) for details.
+.PP
 By default x11vnc will not allow the screen to be shared but it will keep
 listening for new connections after a client disconnects (\fB-forever\fR mode).
 See \fB-shared\fR and \fB-once\fR below to change these defaults.  See the FAQ for details how to tunnel the VNC connection
@@ -6967,10 +6972,12 @@ run by \fB-accept\fR, \fB-gone\fR and other cases:
 .IR stunnel (8),
 .IR su (1),
 .IR http://www.tightvnc.com ,
+.IR https://github.com/netlinux-ai/tightvnc ,
 .IR http://www.realvnc.com ,
 .IR http://www.karlrunge.com/x11vnc/ ,
 .IR http://www.karlrunge.com/x11vnc/#faq,
-.IR https://github.com/LibVNC/x11vnc
+.IR https://github.com/LibVNC/x11vnc ,
+.IR https://github.com/netlinux-ai/x11vnc
 .SH AUTHORS
 x11vnc was written by Karl J. Runge <runge@karlrunge.com>,
 it is part of the LibVNCServer project <https://github.com/LibVNC/libvncserver>.

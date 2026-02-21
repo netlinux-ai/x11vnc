@@ -172,6 +172,15 @@ through an encrypted channel such as ssh(1).  In brief:
 
 Also, use of a VNC password (-rfbauth or -passwdfile) is strongly recommended.
 
+The TightVNC viewer (netlinux fork) can automate this entire process using
+its -sshvnc option: it will SSH to the remote host, start x11vnc
+automatically, discover the display and port, and connect directly.
+Example:
+
+       vncviewer -sshvnc user@far-host
+
+See vncviewer(1) and https://github.com/netlinux-ai/tightvnc for details.
+
 For additional info see: http://www.karlrunge.com/x11vnc/
                     and  http://www.karlrunge.com/x11vnc/faq.html
 

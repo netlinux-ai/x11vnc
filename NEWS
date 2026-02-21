@@ -17,6 +17,12 @@ Netlinux Default Changes (2026-02-21):
     -noxdamage is now the default (avoids problematic XDAMAGE on some systems).
     New -noauth option to revert the default -auth guess behaviour.
 
+TightVNC Integration:
+
+    The TightVNC vncviewer (netlinux fork) has a -sshvnc option that SSHs to
+    a remote host, starts x11vnc automatically, discovers the display and port,
+    and connects directly — no manual setup required.  See vncviewer(1).
+
 Bug Fixes:
     Fixed TLS handshake errors with OpenSSL 1.1.x and LibreSSL compatibility issues.
     Addressed snprintf null destination pointer issue and xfc NULL pointer dereference in cursor.
