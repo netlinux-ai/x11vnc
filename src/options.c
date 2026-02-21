@@ -43,7 +43,7 @@ int debug = 0;
 char *use_dpy = NULL;		/* -display */
 int display_N = 0;
 int auto_port = 0;
-char *auth_file = NULL;		/* -auth/-xauth */
+char *auth_file = NULL;		/* -auth/-xauth; NetLinux: defaulted to "guess" in main() */
 char *visual_str = NULL;	/* -visual */
 int set_visual_str_to_something = 0;
 char *logfile = NULL;		/* -o, -logfile */
@@ -106,7 +106,7 @@ int shared = 0;			/* share vnc display. */
 int shared = 1;
 #endif
 #ifndef FOREVER
-int connect_once = 1;		/* disconnect after first connection session. */
+int connect_once = 0;		/* NetLinux: default to -forever (don't exit after first client) */
 #else
 int connect_once = 0;
 #endif

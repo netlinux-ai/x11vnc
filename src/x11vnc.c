@@ -5080,6 +5080,10 @@ int main(int argc, char* argv[]) {
 	}
 
 
+	/* NetLinux: default to -auth guess if no -auth was specified */
+	if (!auth_file) {
+		auth_file = strdup("guess");
+	}
 	if (auth_file) {
 		check_guess_auth_file();
 		if (auth_file != NULL) {

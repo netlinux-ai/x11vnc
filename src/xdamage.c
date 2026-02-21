@@ -42,9 +42,9 @@ Damage xdamage = 0;
 #endif
 
 #ifndef XDAMAGE
-#define XDAMAGE 1
+#define XDAMAGE 0
 #endif
-int use_xdamage = XDAMAGE;	/* use the xdamage rects for scanline hints */
+int use_xdamage = XDAMAGE;	/* NetLinux: default to -noxdamage (avoids XIO crashes) */
 int xdamage_present = 0;
 
 #ifdef MACOSX
