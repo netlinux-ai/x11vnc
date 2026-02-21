@@ -34,7 +34,7 @@ jobs:
       - name: Determine version
         id: version
         run: |
-          base=$(grep '^AC_INIT' configure.ac | sed "s/.*,[ ]*//" | sed "s/[,)].*//" | tr -d '[:space:]')
+          base=$(grep '^AC_INIT' configure.ac | sed 's/AC_INIT([^,]*, *//' | sed 's/[,)].*//' | tr -d '[:space:]')
           rev=${{ github.run_number }}
           echo "version=${base}-${rev}netlinux1" >> "$GITHUB_OUTPUT"
           echo "tag=v${base}-${rev}netlinux1" >> "$GITHUB_OUTPUT"
