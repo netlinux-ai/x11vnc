@@ -2284,6 +2284,11 @@ int main(int argc, char* argv[]) {
 			auth_file = strdup(argv[++i]);
 			continue;
 		}
+		if (!strcmp(arg, "-noauth")) {
+			auth_file = NULL;
+			got_noauth = 1;
+			continue;
+		}
 		if (!strcmp(arg, "-N")) {
 			display_N = 1;
 			continue;
@@ -5080,8 +5085,8 @@ int main(int argc, char* argv[]) {
 	}
 
 
-	/* NetLinux: default to -auth guess if no -auth was specified */
-	if (!auth_file) {
+	/* NetLinux: default to -auth guess if no -auth/--noauth was specified */
+	if (!auth_file && !got_noauth) {
 		auth_file = strdup("guess");
 	}
 	if (auth_file) {

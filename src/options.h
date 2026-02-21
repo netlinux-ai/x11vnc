@@ -103,6 +103,7 @@ extern int shared;
 extern int connect_once;
 extern int got_connect_once;
 extern int got_findauth;
+extern int got_noauth;
 extern int deny_all;
 extern int accept_remote_cmds;
 extern char *remote_prefix;
